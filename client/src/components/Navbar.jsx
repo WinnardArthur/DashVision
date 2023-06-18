@@ -14,7 +14,8 @@ import { setMode } from "../state";
 import profileImage from "../assets/Winnard Arthur - Frame1.png";
 import { AppBar, IconButton, InputBase, Toolbar, useTheme } from "@mui/material";
 
-const Navbar = () => {
+
+const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
@@ -29,7 +30,7 @@ const Navbar = () => {
       <Toolbar sx={{ justifyContent: "space-between" }}>
         {/* Left area */}
         <FlexBetween>
-          <IconButton onClick={() => {}}>
+          <IconButton onClick={() => {setIsSidebarOpen(!isSidebarOpen)}}>
             <MenuIcon />
           </IconButton>
           <FlexBetween
