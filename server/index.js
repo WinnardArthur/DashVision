@@ -5,12 +5,13 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
-import clientRoutes from './routes/client.js';
+import clientRoutes from "./routes/client.js";
 import generalRoutes from "./routes/general.js";
 import managementRoutes from "./routes/management.js";
 import salesRoutes from "./routes/sales.js";
+import { seedUsers } from "./seedDB.js";
 
-// CONFIGURATION 
+// CONFIGURATION
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -21,17 +22,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
-// ROUTES 
-app.use('/client', clientRoutes);
-app.use('/general', generalRoutes);
-app.use('/manangement', managementRoutes);
-app.use('/sales', salesRoutes)
-
+// ROUTES
+app.use("/client", clientRoutes);
+app.use("/general", generalRoutes);
+app.use("/manangement", managementRoutes);
+app.use("/sales", salesRoutes);
 
 // MONGOOSE SETUP
 const PORT = process.env.PORT || 5000;
-mongoose.connect(process.env.MONGO_URI, {
+mongoose
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true 
-}).then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
-.catch((err) => console.log('An error occured', err))
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
+    seedUsers();
+  })
+  .catch((err) => console.log("An error occured", err));
