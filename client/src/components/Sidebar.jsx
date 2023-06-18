@@ -94,6 +94,7 @@ const navItems = [
 ];
 
 const Sidebar = ({
+  user,
   drawerWidth,
   isSidebarOpen,
   setIsSidebarOpen,
@@ -181,16 +182,61 @@ const Sidebar = ({
                         }}
                       >
                         {icon}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                            {active === lcText && (
-                                <ChevronRightOutlined sx={{ ml: 'auto' }} />
-                            )}
+                      </ListItemIcon>
+                      <ListItemText primary={text} />
+                      {active === lcText && (
+                        <ChevronRightOutlined sx={{ ml: "auto" }} />
+                      )}
                     </ListItemButton>
                   </ListItem>
                 );
               })}
             </List>
+          </Box>
+
+          <Box
+            position="fixed"
+            bottom="0.2rem"
+            backgroundColor="inherit"
+            width="calc(250px - 3rem)"
+          >
+            <Divider width={250} />
+            <Box display="flex" justifyContent="center">
+              <FlexBetween
+                textTransform="none"
+                gap="1rem"
+                m="1.5rem 0rem 0 1.8rem"
+                boxSizing="border-box"
+              >
+                <Box
+                  component={"img"}
+                  alt="profile"
+                  src={profileImage}
+                  height="40px"
+                  width="40px"
+                  borderRadius="50%"
+                  sx={{ objectFit: "cover" }}
+                />
+                <Box textAlign="left">
+                  <Typography
+                    fontWeight="bold"
+                    fontSize="0.9rem"
+                    sx={{ color: theme.palette.secondary[100] }}
+                  >
+                    {user.name}
+                  </Typography>
+                  <Typography
+                    fontSize="0.8rem"
+                    sx={{ color: theme.palette.secondary[200] }}
+                  >
+                    {user.occupation}
+                  </Typography>
+                </Box>
+                <SettingsOutlined
+                  sx={{ color: theme.palette.secondary[200], fontSize: "25px" }}
+                />
+              </FlexBetween>
+            </Box>
           </Box>
         </Drawer>
       )}
