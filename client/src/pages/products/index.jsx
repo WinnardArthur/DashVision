@@ -15,7 +15,6 @@ import { useGetProductsQuery } from "../../state/api";
 import Header from "../../components/Header";
 
 const Product = ({
-  _id,
   name,
   description,
   price,
@@ -53,7 +52,7 @@ const Product = ({
         >
           ${Number(price).toFixed(2)}
         </Typography>
-        <Rating value={rating} readonly />
+        <Rating value={rating} readOnly />
 
         <Typography variant="body2">{description}</Typography>
       </CardContent>
@@ -73,13 +72,15 @@ const Product = ({
         sx={{ color: theme.palette.neutral[300] }}
       >
         <CardContent>
-          <Typography>id: {_id}</Typography>
+          {/* <Typography>id: {_id}</Typography> */}
           <Typography>Supply Left: {supply}</Typography>
           <Typography>
-            Yearly Sales This Year: {stat.yearlySalesTotal}
+            Yearly Sales This Year:{" "}
+            {stat.yearlySalesTotal || stat[0]?.yearlySalesTotal}
           </Typography>
           <Typography>
-            Yearly Units Sold This Year: {stat.yearlyTotalSoldUnits}
+            Yearly Units Sold This Year:{" "}
+            {stat.yearlyTotalSoldUnits || stat[0]?.yearlyTotalSoldUnits}
           </Typography>
         </CardContent>
       </Collapse>
@@ -89,8 +90,9 @@ const Product = ({
 
 const Products = () => {
   const { data, isLoading } = useGetProductsQuery();
-  const isNonMobile = useMediaQuery("min-width: 1000px");
+  const isNonMobile = useMediaQuery("(min-width: 1000px)");
 
+  console.log(data);
   return (
     <Box m="1.5rem 2.5rem">
       <Header title="PRODUCTS" subtitle="See your list of products." />
