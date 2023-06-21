@@ -1,8 +1,9 @@
 import Product from "../models/Product.js";
 import ProductStat from "../models/ProductStat.js";
+import Transaction from "../models/Transaction.js";
 import User from "../models/User.js";
 
-// Get all products and products stats 
+// Get all products and products stats
 export const getProducts = async (req, res) => {
   try {
     const products = await Product.find();
@@ -30,7 +31,43 @@ export const getProducts = async (req, res) => {
 export const getCustomers = async (req, res) => {
   try {
     const customers = await User.find({ role: "user" }).select("-password");
-    res.status(200).json(customers)
+    res.status(200).json(customers);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+// Get all transactions
+export const getTransactions = async (req, res) => {
+  try {
+    const { page = 1, pageSize = 20, sort = null, search = "" } = req.query;
+
+    // Sort function
+    const generateSort = () => {
+      const sortParsed = JSON.parse(sort);
+      const sortFormated = {
+        [sortParsed.field]: sortParsed.sort === "asc" ? 1 : -1,
+      };
+
+      return sortFormated;
+    };
+    const sortFormated = Boolean(sort) ? generateSort() : {};
+
+    const transactions = await Transaction.find({
+      $or: [
+        { cost: { $regex: new RegExp(search, "i") } },
+        { userId: { $regex: new RegExp(search, "i") } },
+      ],
+    })
+      .sort(sortFormated)
+      .skip(page * pageSize)
+      .limit(pageSize);
+
+    const total = await Transaction.countDocuments({
+      name: { $regex: search, $options: "i" },
+    });
+
+    res.status(200).json({ transactions, total });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

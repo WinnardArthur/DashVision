@@ -8,6 +8,7 @@ import Dashboard from './pages/dashboard';
 import Layout from './pages/layout';
 import Products from './pages/products';
 import Customers from "./pages/customers";
+import Transactions from './pages/Transactions';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/products" element={<Products />} />
               <Route path="/customers" element={<Customers />} />
+              <Route path="/transactions" element={<Transactions />} />
             </Route>
           </Routes>
         </ThemeProvider>

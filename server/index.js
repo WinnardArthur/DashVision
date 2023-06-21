@@ -9,7 +9,7 @@ import clientRoutes from "./routes/client.js";
 import generalRoutes from "./routes/general.js";
 import managementRoutes from "./routes/management.js";
 import salesRoutes from "./routes/sales.js";
-import { seedProductStats, seedProducts, seedUsers } from "./seedDB.js";
+import { seedProductStats, seedProducts, seedTransactions, seedUsers } from "./seedDB.js";
 
 // CONFIGURATION
 dotenv.config();
@@ -39,6 +39,7 @@ mongoose
     app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
       seedUsers();
       seedProducts();
-      seedProductStats();
+    seedProductStats();
+    seedTransactions();
   })
   .catch((err) => console.log("An error occured", err));

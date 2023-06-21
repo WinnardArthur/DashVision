@@ -1,7 +1,8 @@
-import { dataUser, dataProduct, dataProductStat } from "./data/index.js";
+import { dataUser, dataProduct, dataProductStat, dataTransaction } from "./data/index.js";
 import User from "./models/User.js";
 import Product from "./models/Product.js";
 import ProductStat from "./models/ProductStat.js";
+import Transaction from "./models/Transaction.js";
 
 // Seed users
 export const seedUsers = () => {
@@ -43,6 +44,21 @@ export const seedProductStats = () => {
           console.log("Product stats loaded successfully");
         })
         .catch((error) => console.log("Failed to load product stats", error));
+    })
+    .catch((error) => console.log("An error occured", error));
+};
+
+
+// Seed Transaction Stats
+export const seedTransactions = () => {
+  Transaction.deleteMany()
+    .then(() => {
+      console.log("Unmounting transactions...");
+      Transaction.insertMany(dataTransaction)
+        .then(() => {
+          console.log("Transactions loaded successfully");
+        })
+        .catch((error) => console.log("Failed to load transactions", error));
     })
     .catch((error) => console.log("An error occured", error));
 };
