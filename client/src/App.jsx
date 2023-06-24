@@ -11,7 +11,7 @@ import Customers from "./pages/customers";
 import Transactions from './pages/Transactions';
 import Geography from './pages/Geography';
 import Overview from "./pages/Overview";
-
+import DailyOverview from "./pages/dailyOverview";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -33,6 +33,7 @@ function App() {
               <Route path="/transactions" element={<Transactions />} />
               <Route path="/geography" element={<Geography />} />
               <Route path="/overview" element={<Overview />} />
+              <Route path="/daily" element={<DailyOverview />} />
             </Route>
           </Routes>
         </ThemeProvider>
