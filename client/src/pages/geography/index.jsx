@@ -38,9 +38,9 @@ const Geography = () => {
                     stroke: theme.palette.secondary[200],
                     strokeWidth: 1,
                   },
-                },
-                text: {
-                  fill: theme.palette.secondary[200],
+                  text: {
+                    fill: theme.palette.secondary[200],
+                  },
                 },
               },
               legends: {
