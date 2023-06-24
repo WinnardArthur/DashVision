@@ -4,14 +4,15 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { themeSettings } from "./theme";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Dashboard from './pages/dashboard';
-import Layout from './pages/layout';
-import Products from './pages/products';
+import Dashboard from "./pages/dashboard";
+import Layout from "./pages/layout";
+import Products from "./pages/products";
 import Customers from "./pages/customers";
-import Transactions from './pages/Transactions';
-import Geography from './pages/Geography';
+import Transactions from "./pages/Transactions";
+import Geography from "./pages/Geography";
 import Overview from "./pages/Overview";
 import DailyOverview from "./pages/dailyOverview";
+import MonthlyOverview from "./pages/monthlyOverview";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -34,6 +35,7 @@ function App() {
               <Route path="/geography" element={<Geography />} />
               <Route path="/overview" element={<Overview />} />
               <Route path="/daily" element={<DailyOverview />} />
+              <Route path="/monthly" element={<MonthlyOverview />} />
             </Route>
           </Routes>
         </ThemeProvider>
