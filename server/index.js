@@ -15,6 +15,7 @@ import {
   seedTransactions,
   seedOverallStat,
   seedUsers,
+  seedAffiliateStat,
 } from "./seedDB.js";
 
 // CONFIGURATION
@@ -48,5 +49,6 @@ mongoose
     seedProductStats();
     seedTransactions();
     seedOverallStat();
+    seedAffiliateStat();
   })
   .catch((err) => console.log("An error occured", err));

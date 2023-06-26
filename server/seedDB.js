@@ -1,9 +1,17 @@
-import { dataUser, dataProduct, dataProductStat, dataTransaction, dataOverallStat } from "./data/index.js";
+import {
+  dataUser,
+  dataProduct,
+  dataProductStat,
+  dataTransaction,
+  dataOverallStat,
+  dataAffiliateStat,
+} from "./data/index.js";
 import User from "./models/User.js";
 import Product from "./models/Product.js";
 import ProductStat from "./models/ProductStat.js";
 import Transaction from "./models/Transaction.js";
 import OverallStat from "./models/OverallStat.js";
+import AffiliateStat from "./models/AffiliateStat.js";
 
 // Seed users
 export const seedUsers = () => {
@@ -49,7 +57,6 @@ export const seedProductStats = () => {
     .catch((error) => console.log("An error occured", error));
 };
 
-
 // Seed Transaction Stats
 export const seedTransactions = () => {
   Transaction.deleteMany()
@@ -74,6 +81,20 @@ export const seedOverallStat = () => {
           console.log("Overall stats loaded successfully");
         })
         .catch((error) => console.log("Failed to load OverallStats", error));
+    })
+    .catch((error) => console.log("An error occured", error));
+};
+
+// Seed AffiliateStats
+export const seedAffiliateStat = () => {
+  AffiliateStat.deleteMany()
+    .then(() => {
+      console.log("Unmounting affiliate statistics...");
+      AffiliateStat.insertMany(dataAffiliateStat)
+        .then(() => {
+          console.log("Affiliate stats loaded successfully");
+        })
+        .catch((error) => console.log("Failed to load AffiliateStats", error));
     })
     .catch((error) => console.log("An error occured", error));
 };
