@@ -41,7 +41,7 @@ export const getCustomers = async (req, res) => {
 // Get all transactions
 export const getTransactions = async (req, res) => {
   try {
-    const { page = 1, pageSize = 20, sort = null, search = "" } = req.query;
+    const { page, pageSize, sort = null, search = "" } = req.query;
 
     // Sort function
     const generateSort = () => {
@@ -64,7 +64,7 @@ export const getTransactions = async (req, res) => {
       .skip(page * pageSize)
       .limit(pageSize);
 
-    const total = await Transaction.countDocuments({
+    const total = await Transaction.estimatedDocumentCount({
       name: { $regex: search, $options: "i" },
     });
 

@@ -9,17 +9,19 @@ const Transactions = () => {
   const theme = useTheme();
 
   const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(20);
+  const [pageSize, setPageSize] = useState(100);
   const [sort, setSort] = useState({});
   const [search, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState("");
 
   const { data, isLoading } = useGetTransactionsQuery({
-    page,
+    page: page + 1,
     pageSize,
     sort: JSON.stringify(sort),
     search,
   });
+
+  console.log("search", searchInput);
 
   const columns = [
     {
@@ -93,12 +95,21 @@ const Transactions = () => {
           pageSize={pageSize}
           paginationMode="server"
           sortingMode="server"
-          onP
           onPaginationModelChange={(newPage) => setPage(newPage)}
           onPageSizeChange={(newPage) => setPageSize(newPage)}
           onSortModelChange={(newSortModel) => setSort(...newSortModel)}
-          slots={{ toolbar: DataGridCustomToolbar }}
-          slotsProps={{ toolbar: { searchInput, setSearchInput, setSearch } }}
+          // slots={{ toolbar: DataGridCustomToolbar }}
+          // slotsProps={{ toolbar: { searchInput, setSearchInput, setSearch } }}
+
+          slots={{
+            toolbar: () => (
+              <DataGridCustomToolbar
+                searchInput={searchInput}
+                setSearchInput={setSearchInput}
+                setSearch={setSearch}
+              />
+            ),
+          }}
         />
       </Box>
     </Box>
