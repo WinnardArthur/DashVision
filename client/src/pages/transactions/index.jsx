@@ -93,6 +93,7 @@ const Transactions = () => {
           pageSize={pageSize}
           paginationMode="server"
           sortingMode="server"
+          onP
           onPaginationModelChange={(newPage) => setPage(newPage)}
           onPageSizeChange={(newPage) => setPageSize(newPage)}
           onSortModelChange={(newSortModel) => setSort(...newSortModel)}
